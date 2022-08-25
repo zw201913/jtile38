@@ -30,7 +30,7 @@ import java.util.Objects;
  * @description:
  */
 @Data
-public class Client implements AutoCloseable {
+public class Tile38Client implements AutoCloseable {
 
 	private static final StringCodec STRING_CODEC = new StringCodec(StandardCharsets.UTF_8);
 
@@ -40,13 +40,13 @@ public class Client implements AutoCloseable {
 
 	private RedisCommands<String, String> commands;
 
-	public Client(final String host, final int port) {
+	public Tile38Client(final String host, final int port) {
 		this(host, port, StringUtils.EMPTY);
 	}
 
 	private static final String PASSWORD_HOST_PORT_URI = "redis://%s@%s:%s";
 
-	public Client(final String host, final int port, final String password) {
+	public Tile38Client(final String host, final int port, final String password) {
 		String uri = String.format(PASSWORD_HOST_PORT_URI, password, host, port);
 		this.redisClient = RedisClient.create(uri);
 		ClientOptions options = ClientOptions.builder().protocolVersion(ProtocolVersion.RESP2).build();

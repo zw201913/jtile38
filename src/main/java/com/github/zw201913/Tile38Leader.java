@@ -3,7 +3,6 @@ package com.github.zw201913;
 
 import com.github.zw201913.entity.*;
 import com.github.zw201913.response.*;
-import com.github.zw201913.util.JsonUtil;
 
 import java.util.Map;
 
@@ -13,14 +12,14 @@ import java.util.Map;
  * @date: 2022/8/12 下午5:53
  * @description:
  */
-public class Leader extends Follower implements AutoCloseable {
+public class Tile38Leader extends Tile38Follower implements AutoCloseable {
 
 
-	public Leader(final String host, final int port, final String password) {
+	public Tile38Leader(final String host, final int port, final String password) {
 		super(host, port, password);
 	}
 
-	public Leader(final String host, final int port) {
+	public Tile38Leader(final String host, final int port) {
 		super(host, port);
 	}
 
@@ -30,7 +29,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ConfigRewriteResponse configRewrite() {
-		return commands(() -> client.configRewrite(), ConfigRewriteResponse.class);
+		return commands(() -> tile38Client.configRewrite(), ConfigRewriteResponse.class);
 	}
 
 	/**
@@ -41,7 +40,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ConfigSetResponse configSet(String parameter, String... value) {
-		return commands(() -> client.configSet(parameter, value), ConfigSetResponse.class);
+		return commands(() -> tile38Client.configSet(parameter, value), ConfigSetResponse.class);
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse del(String key, String id) {
-		return commands(() -> client.del(key, id), DelResponse.class);
+		return commands(() -> tile38Client.del(key, id), DelResponse.class);
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse delChan(String name) {
-		return commands(() -> client.delChan(name), DelResponse.class);
+		return commands(() -> tile38Client.delChan(name), DelResponse.class);
 	}
 
 	/**
@@ -72,7 +71,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse delHook(String name) {
-		return commands(() -> client.delHook(name), DelResponse.class);
+		return commands(() -> tile38Client.delHook(name), DelResponse.class);
 	}
 
 
@@ -83,7 +82,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DropResponse drop(String key) {
-		return commands(() -> client.drop(key), DropResponse.class);
+		return commands(() -> tile38Client.drop(key), DropResponse.class);
 	}
 
 	/**
@@ -95,7 +94,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ExpireResponse expire(String key, String id, int seconds) {
-		return commands(() -> client.expire(key, id, seconds), ExpireResponse.class);
+		return commands(() -> tile38Client.expire(key, id, seconds), ExpireResponse.class);
 	}
 
 	/**
@@ -104,7 +103,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public FlushDBResponse flushDB() {
-		return commands(() -> client.flushDB(), FlushDBResponse.class);
+		return commands(() -> tile38Client.flushDB(), FlushDBResponse.class);
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse fset(String key, String id, Map<String, Double> fields, boolean isXx) {
-		return commands(() -> client.fset(key, id, fields, isXx), SetResponse.class);
+		return commands(() -> tile38Client.fset(key, id, fields, isXx), SetResponse.class);
 	}
 
 	/**
@@ -129,7 +128,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse fset(String key, String id, Map<String, Double> fields) {
-		return commands(() -> client.fset(key, id, fields), SetResponse.class);
+		return commands(() -> tile38Client.fset(key, id, fields), SetResponse.class);
 	}
 
 	/**
@@ -143,7 +142,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse fset(String key, String id, String field, Double value, boolean isXx) {
-		return commands(() -> client.fset(key, id, field, value, isXx), SetResponse.class);
+		return commands(() -> tile38Client.fset(key, id, field, value, isXx), SetResponse.class);
 	}
 
 	/**
@@ -156,14 +155,14 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse fset(String key, String id, String field, Double value) {
-		return commands(() -> client.fset(key, id, field, value), SetResponse.class);
+		return commands(() -> tile38Client.fset(key, id, field, value), SetResponse.class);
 	}
 
 	/**
 	 * @return
 	 */
 	public GCResponse gc() {
-		return commands(() -> client.gc(), GCResponse.class);
+		return commands(() -> tile38Client.gc(), GCResponse.class);
 	}
 
 	/**
@@ -175,7 +174,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse jdel(String key, String id, String path) {
-		return commands(() -> client.jdel(key, id, path), DelResponse.class);
+		return commands(() -> tile38Client.jdel(key, id, path), DelResponse.class);
 	}
 
 	/**
@@ -188,7 +187,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse jset(String key, String id, String path, String value) {
-		return commands(() -> client.jset(key, id, path, value), SetResponse.class);
+		return commands(() -> tile38Client.jset(key, id, path, value), SetResponse.class);
 	}
 
 	/**
@@ -201,7 +200,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse jsetRaw(String key, String id, String path, String value) {
-		return commands(() -> client.jsetRaw(key, id, path, value), SetResponse.class);
+		return commands(() -> tile38Client.jsetRaw(key, id, path, value), SetResponse.class);
 	}
 
 	/**
@@ -214,7 +213,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse jsetStr(String key, String id, String path, String value) {
-		return commands(() -> client.jsetStr(key, id, path, value), SetResponse.class);
+		return commands(() -> tile38Client.jsetStr(key, id, path, value), SetResponse.class);
 	}
 
 	/**
@@ -225,7 +224,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse pdel(String key, String pattern) {
-		return commands(() -> client.pdel(key, pattern), DelResponse.class);
+		return commands(() -> tile38Client.pdel(key, pattern), DelResponse.class);
 	}
 
 	/**
@@ -235,7 +234,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse pdelChan(String pattern) {
-		return commands(() -> client.pdelChan(pattern), DelResponse.class);
+		return commands(() -> tile38Client.pdelChan(pattern), DelResponse.class);
 	}
 
 	/**
@@ -245,7 +244,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse pdelHook(String pattern) {
-		return commands(() -> client.pdelHook(pattern), DelResponse.class);
+		return commands(() -> tile38Client.pdelHook(pattern), DelResponse.class);
 	}
 
 	/**
@@ -256,7 +255,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public DelResponse persist(String key, String id) {
-		return commands(() -> client.persist(key, id), DelResponse.class);
+		return commands(() -> tile38Client.persist(key, id), DelResponse.class);
 	}
 
 	/**
@@ -267,7 +266,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public PSubscribeResponse psubscribe(String pattern, String... patterns) {
-		return commands(() -> client.psubscribe(pattern, patterns), PSubscribeResponse.class);
+		return commands(() -> tile38Client.psubscribe(pattern, patterns), PSubscribeResponse.class);
 	}
 
 	/**
@@ -277,7 +276,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse readOnly(boolean readOnly) {
-		return commands(() -> client.readOnly(readOnly), SetResponse.class);
+		return commands(() -> tile38Client.readOnly(readOnly), SetResponse.class);
 	}
 
 	/**
@@ -286,7 +285,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public RenameResponse rename(String key, String newkey) {
-		return commands(() -> client.rename(key, newkey), RenameResponse.class);
+		return commands(() -> tile38Client.rename(key, newkey), RenameResponse.class);
 	}
 
 	/**
@@ -295,7 +294,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public RenameResponse renameNx(String key, String newkey) {
-		return commands(() -> client.renameNx(key, newkey), RenameResponse.class);
+		return commands(() -> tile38Client.renameNx(key, newkey), RenameResponse.class);
 	}
 
 	/**
@@ -304,7 +303,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ScriptFlushResponse scriptFlush() {
-		return commands(() -> client.scriptFlush(), ScriptFlushResponse.class);
+		return commands(() -> tile38Client.scriptFlush(), ScriptFlushResponse.class);
 	}
 
 	/**
@@ -314,7 +313,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ScriptLoadResponse scriptLoad(String script) {
-		return commands(() -> client.scriptLoad(script), ScriptLoadResponse.class);
+		return commands(() -> tile38Client.scriptLoad(script), ScriptLoadResponse.class);
 	}
 
 	/**
@@ -325,7 +324,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setPoint(final SetOpts setOpts, final Point point) {
-		return commands(() -> client.setPoint(setOpts, point), SetResponse.class);
+		return commands(() -> tile38Client.setPoint(setOpts, point), SetResponse.class);
 	}
 
 
@@ -337,7 +336,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setBounds(final SetOpts setOpts, Bounds bounds) {
-		return commands(() -> client.setBounds(setOpts, bounds), SetResponse.class);
+		return commands(() -> tile38Client.setBounds(setOpts, bounds), SetResponse.class);
 	}
 
 	/**
@@ -348,7 +347,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setGeohash(final SetOpts setOpts, final Geohash geohash) {
-		return commands(() -> client.setGeohash(setOpts, geohash), SetResponse.class);
+		return commands(() -> tile38Client.setGeohash(setOpts, geohash), SetResponse.class);
 	}
 
 	/**
@@ -359,7 +358,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setGeohash(final SetOpts setOpts, final String geoJson) {
-		return commands(() -> client.setGeohash(setOpts, geoJson), SetResponse.class);
+		return commands(() -> tile38Client.setGeohash(setOpts, geoJson), SetResponse.class);
 	}
 
 	/**
@@ -370,7 +369,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setGeoJson(final SetOpts setOpts, final GeoJson.BaseGeoJson geoJson) {
-		return commands(() -> client.setObject(setOpts, geoJson), SetResponse.class);
+		return commands(() -> tile38Client.setObject(setOpts, geoJson), SetResponse.class);
 	}
 
 	/**
@@ -381,7 +380,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setRawString(final SetOpts setOpts, final RawString rawString) {
-		return commands(() -> client.setString(setOpts, rawString), SetResponse.class);
+		return commands(() -> tile38Client.setString(setOpts, rawString), SetResponse.class);
 	}
 
 	/**
@@ -392,7 +391,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setRawString(final SetOpts setOpts, final String rawString) {
-		return commands(() -> client.setString(setOpts, rawString), SetResponse.class);
+		return commands(() -> tile38Client.setString(setOpts, rawString), SetResponse.class);
 	}
 
 	/**
@@ -404,7 +403,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public SetResponse setChanNearBy(SetChanNearByOpts setChanNearByOpts, Point point) throws Exception {
-		return commandsThrowException(() -> client.setChanNearBy(setChanNearByOpts, point), SetResponse.class);
+		return commandsThrowException(() -> tile38Client.setChanNearBy(setChanNearByOpts, point), SetResponse.class);
 	}
 
 	/**
@@ -416,7 +415,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public SetResponse setChanNearBy(SetChanNearByOpts setChanNearByOpts, Roam roam) {
-		return commands(() -> client.setChanNearBy(setChanNearByOpts, roam), SetResponse.class);
+		return commands(() -> tile38Client.setChanNearBy(setChanNearByOpts, roam), SetResponse.class);
 	}
 
 	/**
@@ -427,7 +426,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setChanIntersects(SetChanIntersectsOpts setChanIntersectsOpts, Element element) {
-		return commands(() -> client.setChanIntersects(setChanIntersectsOpts, element), SetResponse.class);
+		return commands(() -> tile38Client.setChanIntersects(setChanIntersectsOpts, element), SetResponse.class);
 	}
 
 	/**
@@ -438,7 +437,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setChanWithIn(SetChanWithInOpts setChanWithInOpts, Element element) {
-		return commands(() -> client.setChanWithIn(setChanWithInOpts, element), SetResponse.class);
+		return commands(() -> tile38Client.setChanWithIn(setChanWithInOpts, element), SetResponse.class);
 	}
 
 	/**
@@ -449,7 +448,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setHookNearBy(SetHookNearByOpts setHookNearByOpts, Point point) throws Exception {
-		return commandsThrowException(() -> client.setHookNearBy(setHookNearByOpts, point), SetResponse.class);
+		return commandsThrowException(() -> tile38Client.setHookNearBy(setHookNearByOpts, point), SetResponse.class);
 	}
 
 	/**
@@ -461,7 +460,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public SetResponse setHookNearBy(SetHookNearByOpts setHookNearByOpts, Roam roam) {
-		return commands(() -> client.setHookNearBy(setHookNearByOpts, roam), SetResponse.class);
+		return commands(() -> tile38Client.setHookNearBy(setHookNearByOpts, roam), SetResponse.class);
 	}
 
 	/**
@@ -472,7 +471,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setHookIntersects(SetHookIntersectsOpts setHookIntersectsOpts, Element element) {
-		return commands(() -> client.setHookIntersects(setHookIntersectsOpts, element), SetResponse.class);
+		return commands(() -> tile38Client.setHookIntersects(setHookIntersectsOpts, element), SetResponse.class);
 	}
 
 	/**
@@ -483,7 +482,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse setHookWithIn(SetHookWithInOpts setHookWithInOpts, Element element) {
-		return commands(() -> client.setHookWithIn(setHookWithInOpts, element), SetResponse.class);
+		return commands(() -> tile38Client.setHookWithIn(setHookWithInOpts, element), SetResponse.class);
 	}
 
 	/**
@@ -494,7 +493,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SubscribeResponse subscribe(String channel, String... channels) {
-		return commands(() -> client.subscribe(channel, channels), SubscribeResponse.class);
+		return commands(() -> tile38Client.subscribe(channel, channels), SubscribeResponse.class);
 	}
 
 	/**
@@ -502,7 +501,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse eval(EvalScriptOpts opts) {
-		return commands(() -> client.eval(opts), EvalResponse.class);
+		return commands(() -> tile38Client.eval(opts), EvalResponse.class);
 	}
 
 	/**
@@ -510,7 +509,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse evalNa(EvalScriptOpts opts) {
-		return commands(() -> client.evalNa(opts), EvalResponse.class);
+		return commands(() -> tile38Client.evalNa(opts), EvalResponse.class);
 	}
 
 	/**
@@ -518,7 +517,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse evalNaSha(EvalScriptOpts opts) {
-		return commands(() -> client.evalNaSha(opts), EvalResponse.class);
+		return commands(() -> tile38Client.evalNaSha(opts), EvalResponse.class);
 	}
 
 	/**
@@ -526,7 +525,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse evalSha(EvalScriptOpts opts) {
-		return commands(() -> client.evalSha(opts), EvalResponse.class);
+		return commands(() -> tile38Client.evalSha(opts), EvalResponse.class);
 	}
 
 	/**
@@ -536,7 +535,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse eval(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> client.eval(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> tile38Client.eval(opts, timeout), EvalResponse.class);
 	}
 
 	/**
@@ -546,7 +545,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse evalNa(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> client.evalNa(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> tile38Client.evalNa(opts, timeout), EvalResponse.class);
 	}
 
 	/**
@@ -556,7 +555,7 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse evalNaSha(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> client.evalNaSha(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> tile38Client.evalNaSha(opts, timeout), EvalResponse.class);
 	}
 
 	/**
@@ -566,6 +565,6 @@ public class Leader extends Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse evalSha(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> client.evalSha(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> tile38Client.evalSha(opts, timeout), EvalResponse.class);
 	}
 }

@@ -568,8 +568,4 @@ public class Leader extends Follower implements AutoCloseable {
 	public EvalResponse evalSha(EvalScriptOpts opts, double timeout) throws Exception {
 		return commandsThrowException(() -> client.evalSha(opts, timeout), EvalResponse.class);
 	}
-
-	public static void main(String[] args) {
-		JsonUtil.string2Obj("{name:zouwei}", Map.class);
-	}
 }

@@ -6,7 +6,7 @@
 
     <groupId>com.github.zw201913</groupId>
     <artifactId>jtile38</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>jtile38</name>
     <description>java client for tile38</description>
     <url>https://github.com/zw201913/jtile38</url>

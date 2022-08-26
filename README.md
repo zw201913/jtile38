@@ -116,7 +116,8 @@
 
 `JTile38`是一个开源项目, 如果想支持本项目, 欢迎请我喝咖啡可以 ☕
 
-
+<p><image width="180" src="https://user-images.githubusercontent.com/16849315/186829736-a2e66254-bcff-4827-bd05-37df0eb9f785.jpg">
+<image width="180" src="https://user-images.githubusercontent.com/16849315/186829768-ab60f742-d215-4e96-81ba-1b6ef24db7bc.png"></p>
 
 ## ⚠️ 开源协议
 

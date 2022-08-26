@@ -16,22 +16,22 @@ import java.util.function.Supplier;
  * @date: 2022/8/12 下午2:08
  * @description:
  */
-public class Tile38Follower implements AutoCloseable {
+public class JTile38Follower implements AutoCloseable {
 
-	protected Tile38Client tile38Client;
+	protected JTile38Client client;
 
-	public Tile38Follower(final String host, final int port, final String password) {
-		this.tile38Client = new Tile38Client(host, port, password);
+	public JTile38Follower(final String host, final int port, final String password) {
+		this.client = new JTile38Client(host, port, password);
 	}
 
-	public Tile38Follower(final String host, final int port) {
-		this.tile38Client = new Tile38Client(host, port);
+	public JTile38Follower(final String host, final int port) {
+		this.client = new JTile38Client(host, port);
 	}
 
 	@Override
 	public void close() {
-		if (Objects.nonNull(tile38Client)) {
-			tile38Client.close();
+		if (Objects.nonNull(client)) {
+			client.close();
 		}
 	}
 
@@ -42,7 +42,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public AofResponse aof(final int pos) {
-		return commands(() -> tile38Client.aof(pos), json -> {
+		return commands(() -> client.aof(pos), json -> {
 			if (StringUtils.equals(json, "OK")) {
 				return AofResponse.success();
 			}
@@ -56,7 +56,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public AofMd5Response aofMd5(final int pos, final int size) {
-		return commands(() -> tile38Client.aofMd5(pos, size), AofMd5Response.class);
+		return commands(() -> client.aofMd5(pos, size), AofMd5Response.class);
 	}
 
 
@@ -66,7 +66,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public AofShrinkResponse aofShrink() {
-		return commands(() -> tile38Client.aofShrink(), AofShrinkResponse.class);
+		return commands(() -> client.aofShrink(), AofShrinkResponse.class);
 	}
 
 
@@ -77,7 +77,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public AuthResponse auth(final String password) {
-		return commands(() -> tile38Client.auth(password), AuthResponse.class);
+		return commands(() -> client.auth(password), AuthResponse.class);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public BoundsResponse bounds(final String key) {
-		return commands(() -> tile38Client.bounds(key), BoundsResponse.class);
+		return commands(() -> client.bounds(key), BoundsResponse.class);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ChansResponse chans(final String pattern) {
-		return commands(() -> tile38Client.chans(pattern), ChansResponse.class);
+		return commands(() -> client.chans(pattern), ChansResponse.class);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ConfigGetResponse configGet(final String parameter) {
-		return commands(() -> tile38Client.configGet(parameter), ConfigGetResponse.class);
+		return commands(() -> client.configGet(parameter), ConfigGetResponse.class);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetResponse get(String key, String id) {
-		return commands(() -> tile38Client.get(key, id), GetResponse.class);
+		return commands(() -> client.get(key, id), GetResponse.class);
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetResponse getWithFields(String key, String id) {
-		return commands(() -> tile38Client.getWithFields(key, id), GetResponse.class);
+		return commands(() -> client.getWithFields(key, id), GetResponse.class);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetPointResponse getPointWithFields(String key, String id) {
-		return commands(() -> tile38Client.getPoint(key, id, true), GetPointResponse.class);
+		return commands(() -> client.getPoint(key, id, true), GetPointResponse.class);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetPointResponse getPoint(String key, String id) {
-		return commands(() -> tile38Client.getPoint(key, id, false), GetPointResponse.class);
+		return commands(() -> client.getPoint(key, id, false), GetPointResponse.class);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetBoundsResponse getBoundsWithFields(String key, String id) {
-		return commands(() -> tile38Client.getBounds(key, id, true), GetBoundsResponse.class);
+		return commands(() -> client.getBounds(key, id, true), GetBoundsResponse.class);
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetBoundsResponse getBounds(String key, String id) {
-		return commands(() -> tile38Client.getBounds(key, id, false), GetBoundsResponse.class);
+		return commands(() -> client.getBounds(key, id, false), GetBoundsResponse.class);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetGeohashResponse getGeohashWithFields(String key, String id, int precision) {
-		return commands(() -> tile38Client.getGeohash(key, id, precision, true), GetGeohashResponse.class);
+		return commands(() -> client.getGeohash(key, id, precision, true), GetGeohashResponse.class);
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetGeohashResponse getGeohash(String key, String id, int precision) {
-		return commands(() -> tile38Client.getGeohash(key, id, precision, false), GetGeohashResponse.class);
+		return commands(() -> client.getGeohash(key, id, precision, false), GetGeohashResponse.class);
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetResponse getObjectWithFields(String key, String id) {
-		return commands(() -> tile38Client.getObject(key, id, true), GetResponse.class);
+		return commands(() -> client.getObject(key, id, true), GetResponse.class);
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public GetResponse getObject(String key, String id) {
-		return commands(() -> tile38Client.getObject(key, id, false), GetResponse.class);
+		return commands(() -> client.getObject(key, id, false), GetResponse.class);
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public IntersectsResponse intersects(IntersectsOpts intersectsOpts, Element element) {
-		return commands(() -> tile38Client.intersects(intersectsOpts, element), IntersectsResponse.class);
+		return commands(() -> client.intersects(intersectsOpts, element), IntersectsResponse.class);
 	}
 
 	/**
@@ -239,7 +239,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public IntersectsResponse intersects(IntersectsOpts intersectsOpts, Element element, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.intersects(intersectsOpts, element, timeout), IntersectsResponse.class);
+		return commandsThrowException(() -> client.intersects(intersectsOpts, element, timeout), IntersectsResponse.class);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public JGetResponse jget(String key, String id, String path, boolean isRaw) {
-		return commands(() -> tile38Client.jget(key, id, path, isRaw), JGetResponse.class);
+		return commands(() -> client.jget(key, id, path, isRaw), JGetResponse.class);
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public JGetResponse jget(String key, String id, String path) {
-		return commands(() -> tile38Client.jget(key, id, path), JGetResponse.class);
+		return commands(() -> client.jget(key, id, path), JGetResponse.class);
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public KeysResponse keys(String pattern) {
-		return commands(() -> tile38Client.keys(pattern), KeysResponse.class);
+		return commands(() -> client.keys(pattern), KeysResponse.class);
 	}
 
 
@@ -285,7 +285,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public HooksResponse hooks(String pattern) {
-		return commands(() -> tile38Client.hooks(pattern), HooksResponse.class);
+		return commands(() -> client.hooks(pattern), HooksResponse.class);
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public OutputResponse output() {
-		return commands(() -> tile38Client.output(), s -> {
+		return commands(() -> client.output(), s -> {
 //			{"ok":true,"output":"json","elapsed":130ns}
 			String elapsed = StringUtils.substringBetween(s, "\"elapsed\":", "}");
 			if (StringUtils.containsAny(elapsed, "\'", "\"")) {
@@ -315,7 +315,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public PingResponse ping() {
-		return commands(() -> tile38Client.ping(), PingResponse.class);
+		return commands(() -> client.ping(), PingResponse.class);
 	}
 
 	/**
@@ -324,7 +324,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public boolean quit() {
-		return commands(() -> tile38Client.quit(), s -> StringUtils.equals(s, "OK"));
+		return commands(() -> client.quit(), s -> StringUtils.equals(s, "OK"));
 	}
 
 	/**
@@ -335,14 +335,14 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public boolean scriptExists(String sha1, String... sha1s) {
-		return commands(() -> tile38Client.scriptExists(sha1, sha1s), s -> true);
+		return commands(() -> client.scriptExists(sha1, sha1s), s -> true);
 	}
 
 	/**
 	 * @return
 	 */
 	public ServerResponse server() {
-		return commands(() -> tile38Client.server(), ServerResponse.class);
+		return commands(() -> client.server(), ServerResponse.class);
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public StatsResponse stats(String key, String... keys) {
-		return commands(() -> tile38Client.stats(key, keys), StatsResponse.class);
+		return commands(() -> client.stats(key, keys), StatsResponse.class);
 	}
 
 	/**
@@ -361,7 +361,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public ScanResponse scan(ScanOpts scanOpts) {
-		return commands(() -> tile38Client.scan(scanOpts), ScanResponse.class);
+		return commands(() -> client.scan(scanOpts), ScanResponse.class);
 	}
 
 	/**
@@ -371,7 +371,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public ScanResponse scan(ScanOpts scanOpts, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.scan(scanOpts, timeout), ScanResponse.class);
+		return commandsThrowException(() -> client.scan(scanOpts, timeout), ScanResponse.class);
 	}
 
 	/**
@@ -384,7 +384,7 @@ public class Tile38Follower implements AutoCloseable {
 		ScanOpts scanOpts = (ScanOpts) new ScanOpts.Builder()
 				.key(key)
 				.build();
-		return commands(() -> tile38Client.scan(scanOpts), ScanResponse.class);
+		return commands(() -> client.scan(scanOpts), ScanResponse.class);
 	}
 
 	/**
@@ -397,7 +397,7 @@ public class Tile38Follower implements AutoCloseable {
 		ScanOpts scanOpts = (ScanOpts) new ScanOpts.Builder()
 				.key(key)
 				.build();
-		return commandsThrowException(() -> tile38Client.scan(scanOpts, timeout), ScanResponse.class);
+		return commandsThrowException(() -> client.scan(scanOpts, timeout), ScanResponse.class);
 	}
 
 	/**
@@ -408,7 +408,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public TtlResponse ttl(String key, String id) {
-		return commands(() -> tile38Client.ttl(key, id), TtlResponse.class);
+		return commands(() -> client.ttl(key, id), TtlResponse.class);
 	}
 
 	/**
@@ -418,7 +418,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SearchResponse search(SearchOpts searchOpts) {
-		return commands(() -> tile38Client.search(searchOpts), SearchResponse.class);
+		return commands(() -> client.search(searchOpts), SearchResponse.class);
 	}
 
 	/**
@@ -428,7 +428,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public SearchResponse search(SearchOpts searchOpts, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.search(searchOpts, timeout), SearchResponse.class);
+		return commandsThrowException(() -> client.search(searchOpts, timeout), SearchResponse.class);
 	}
 
 	/**
@@ -439,7 +439,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public NearByResponse nearbyPoint(NearByOpts nearByOpts, Point point) {
-		return commands(() -> tile38Client.nearbyPoint(nearByOpts, point), NearByResponse.class);
+		return commands(() -> client.nearbyPoint(nearByOpts, point), NearByResponse.class);
 	}
 
 	/**
@@ -450,7 +450,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public NearByResponse nearbyPoint(NearByOpts nearByOpts, Point point, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.nearbyPoint(nearByOpts, point, timeout), NearByResponse.class);
+		return commandsThrowException(() -> client.nearbyPoint(nearByOpts, point, timeout), NearByResponse.class);
 	}
 
 	/**
@@ -459,7 +459,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public NearByResponse nearbyRoam(NearByOpts nearByOpts, Roam roam) {
-		return commands(() -> tile38Client.nearbyRoam(nearByOpts, roam), NearByResponse.class);
+		return commands(() -> client.nearbyRoam(nearByOpts, roam), NearByResponse.class);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public NearByResponse nearbyRoam(NearByOpts nearByOpts, Roam roam, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.nearbyRoam(nearByOpts, roam, timeout), NearByResponse.class);
+		return commandsThrowException(() -> client.nearbyRoam(nearByOpts, roam, timeout), NearByResponse.class);
 	}
 
 	/**
@@ -479,7 +479,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public WithInResponse within(WithInOpts withInOpts, Element element) {
-		return commands(() -> tile38Client.within(withInOpts, element), WithInResponse.class);
+		return commands(() -> client.within(withInOpts, element), WithInResponse.class);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public WithInResponse within(WithInOpts withInOpts, Element element, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.within(withInOpts, element, timeout), WithInResponse.class);
+		return commandsThrowException(() -> client.within(withInOpts, element, timeout), WithInResponse.class);
 	}
 
 	/**
@@ -499,14 +499,14 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public SetResponse follow(String host, int port) {
-		return commands(() -> tile38Client.follow(host, port), SetResponse.class);
+		return commands(() -> client.follow(host, port), SetResponse.class);
 	}
 
 	/**
 	 * @return
 	 */
 	public SetResponse noFollow() {
-		return commands(() -> tile38Client.noFollow(), SetResponse.class);
+		return commands(() -> client.noFollow(), SetResponse.class);
 	}
 
 	/**
@@ -514,7 +514,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse evalRo(EvalScriptOpts opts) {
-		return commands(() -> tile38Client.evalRo(opts), EvalResponse.class);
+		return commands(() -> client.evalRo(opts), EvalResponse.class);
 	}
 
 	/**
@@ -522,7 +522,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public EvalResponse evalRoSha(EvalScriptOpts opts) {
-		return commands(() -> tile38Client.evalRoSha(opts), EvalResponse.class);
+		return commands(() -> client.evalRoSha(opts), EvalResponse.class);
 	}
 
 	/**
@@ -532,7 +532,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse evalRo(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.evalRo(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> client.evalRo(opts, timeout), EvalResponse.class);
 	}
 
 	/**
@@ -542,7 +542,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @throws Exception
 	 */
 	public EvalResponse evalRoSha(EvalScriptOpts opts, double timeout) throws Exception {
-		return commandsThrowException(() -> tile38Client.evalRoSha(opts, timeout), EvalResponse.class);
+		return commandsThrowException(() -> client.evalRoSha(opts, timeout), EvalResponse.class);
 	}
 
 	/**
@@ -551,7 +551,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public TestResponse testWithIn(Element e1, Element e2) {
-		return commands(() -> tile38Client.testWithIn(e1, e2), TestResponse.class);
+		return commands(() -> client.testWithIn(e1, e2), TestResponse.class);
 	}
 
 	/**
@@ -561,7 +561,7 @@ public class Tile38Follower implements AutoCloseable {
 	 * @return
 	 */
 	public TestResponse testIntersects(Element e1, Element e2, boolean clip) {
-		return commands(() -> tile38Client.testIntersects(e1, e2, clip), TestResponse.class);
+		return commands(() -> client.testIntersects(e1, e2, clip), TestResponse.class);
 	}
 
 	/**

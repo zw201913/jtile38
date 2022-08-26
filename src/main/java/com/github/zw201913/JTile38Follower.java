@@ -583,7 +583,6 @@ public class JTile38Follower implements AutoCloseable {
 	protected <T> T commands(Supplier<String> action, Function<String, T> resultHandler) {
 		try {
 			String result = action.get();
-			System.out.println(result);
 			return resultHandler.apply(result);
 		} catch (Exception e) {
 			throw e;

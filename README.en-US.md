@@ -111,6 +111,13 @@
      // close link
 	 leader.close();
      ```
+
+## ☕ Supporters
+
+`JTile38` is an open source project. If you want to support Salvo, you can ☕ 
+
+
+
 ## ⚠️ License
 
 JTile38 is licensed under either of

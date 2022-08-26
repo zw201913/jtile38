@@ -114,7 +114,7 @@
 
 ## ☕ Supporters
 
-`JTile38` is an open source project. If you want to support Salvo, you can ☕ [**buy a coffee here**](https://www.buymeacoffee.com/zouwei9305g)
+`JTile38` is an open source project. If you want to support it, you can ☕ [**buy a coffee here**](https://www.buymeacoffee.com/zouwei9305g)
 
 <p><image width="180" src="https://user-images.githubusercontent.com/16849315/186829736-a2e66254-bcff-4827-bd05-37df0eb9f785.jpg">
 <image width="180" src="https://user-images.githubusercontent.com/16849315/186829768-ab60f742-d215-4e96-81ba-1b6ef24db7bc.png"></p>

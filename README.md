@@ -111,3 +111,9 @@
      // 关闭链接
 	 leader.close();
      ```
+     
+## ⚠️ 开源协议
+
+JTile38 项目采用以下开源协议:
+* Apache License, Version 2.0, ([LICENSE](LICENSE) or [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0))
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))

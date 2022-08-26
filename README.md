@@ -23,10 +23,10 @@
          <version>1.0.2</version>
      </dependency>
      ```
-   - 使用JTile38Clien
+   - 使用JTile38Client
    
      ```java
-     Tile38Client client = new Tile38Client(host, port, password);
+     JTile38Client client = new JTile38Client(host, port, password);
      // 添加Point数据
      SetOpts opts = new SetOpts.Builder()
                 .key("fleet")
@@ -46,11 +46,31 @@
      // 判断在目标区域500米范围内的数据列表
      WithInOpts withInOpts = (WithInOpts) new WithInOpts.Builder()
                              .key("fleet")
+     // 设置返回结果
                              .resultType(ResultType.hashes(5))
                              .build();
      String withInResult = client.within(withInOpts, new Circle(39.867514, 116.577703, 500));
      // {"ok":true,"fields":["age","height","speed"],"hashes":[{"id":"geojsonPolygon","hash":"wx4fu","fields":[0,120.5,90.5]},{"id":"geojsonMultiPolygon","hash":"wx4fu","fields":[0,120.5,90.5]}],"count":2,"cursor":0,"elapsed":"86.252µs"}
-	    System.out.println(withInResult);
+        System.out.println(withInResult);
+     
+     //关闭链接
      client.close();
      ```
-   - 
+   - 使用JTile38Follower
+
+     JTile38Follower只能使用查询功能，并且所有的返回结果都已经被封装成实体类；
+     ```java
+     Tile38Follower follower = new Tile38Follower("42.192.50.8", 9851, "123456");
+     
+     // 查询指定数据truck1
+	 GetPointResponse getPointResponse = follower.getPoint("fleet", "truck1");
+	 // GetPointResponse(super=BaseResponse(ok=true, elapsed=10.47µs, err=null), fields=null, point=GetPointResponse.Point(lat=116.249113, lon=39.762651, z=0))
+	 System.out.println(getPointResponse);
+     // 查询fleet下所有数据
+	 ScanResponse scanResponse = follower.scan("fleet");
+	 // ScanResponse(super=BaseResponse(ok=true, elapsed=122.14µs, err=null), fields=[age, height, speed], ids=null, points=null, bounds=null, hashes=null, objects=[ScanResponse.Data(id=bounds1, object=ScanResponse.DataObject(raw=null, type=Polygon, coordinates=[[[39.867514, 116.577703], [39.868634, 116.577703], [39.868634, 116.578497], [39.867514, 116.578497], [39.867514, 116.577703]]], meta=null), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonLineString, object=ScanResponse.DataObject(raw=null, type=LineString, coordinates=[[39.867514, 116.577703], [39.868634, 116.578497]], meta={name=zouwei, gender=7}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonMultiLineString, object=ScanResponse.DataObject(raw=null, type=MultiLineString, coordinates=[[[39.867514, 116.577703], [39.868634, 116.578497]], [[39.867314, 116.577503], [39.866634, 116.576497]]], meta={name=zouwei, gender=1}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonMultiPoint, object=ScanResponse.DataObject(raw=null, type=MultiPoint, coordinates=[[39.867514, 116.577703], [39.868634, 116.578497]], meta={name=zouwei, age=30}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonMultiPolygon, object=ScanResponse.DataObject(raw=null, type=MultiPolygon, coordinates=[[[[116.577703, 39.867514], [116.578497, 39.868634], [116.576497, 39.867634], [116.577703, 39.867514]], [[116.577703, 39.867514], [116.578497, 39.868634], [116.576497, 39.867634], [116.577703, 39.867514]]]], meta={name=zouwei, gender=7}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonPoint, object=ScanResponse.DataObject(raw=null, type=Point, coordinates=[39.867514, 116.577703], meta={name=zouwei, age=30}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonPolygon, object=ScanResponse.DataObject(raw=null, type=Polygon, coordinates=[[[116.577703, 39.867514], [116.578497, 39.868634], [116.576497, 39.867634], [116.577703, 39.867514]]], meta={name=zouwei, gender=7}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=geojsonpoint, object=ScanResponse.DataObject(raw=null, type=LineString, coordinates=[[39.867514, 116.577703], [39.868634, 116.578497]], meta={name=zouwei}), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=hash, object=ScanResponse.DataObject(raw=rawString, type=RawString, coordinates=null, meta=null), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=hello, object=ScanResponse.DataObject(raw=null, type=Point, coordinates=[33.462, -112.268], meta=null), fields=[30.0, 0.0, 0.0]), ScanResponse.Data(id=json, object=ScanResponse.DataObject(raw={"name":{"first":"zou"}}, type=RawString, coordinates=null, meta=null), fields=[0.0, 0.0, 0.0]), ScanResponse.Data(id=point1, object=ScanResponse.DataObject(raw=null, type=Point, coordinates=[39.867514, 116.577703, 1661309797349], meta=null), fields=[0.0, 120.5, 90.5]), ScanResponse.Data(id=truck1, object=ScanResponse.DataObject(raw=null, type=Point, coordinates=[39.762651, 116.249113], meta=null), fields=[0.0, 123.8, 90.5])], count=13, cursor=0)
+	 System.out.println(scanResponse);
+
+     // 关闭链接
+	 follower.close();
+     ```

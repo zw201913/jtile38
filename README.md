@@ -60,7 +60,7 @@
 
      JTile38Follower只能使用查询功能，并且所有的返回结果都已经被封装成实体类；
      ```java
-     JTile38Follower follower = new JTile38Follower("42.192.50.8", 9851, "123456");
+     JTile38Follower follower = new JTile38Follower(host, port, password);
      
      // 查询指定数据truck1
      GetPointResponse getPointResponse = follower.getPoint("fleet", "truck1");
@@ -77,7 +77,7 @@
    - 使用JTile38Leader
 
      ```java
-     JTile38Leader leader = new JTile38Leader("42.192.50.8", 9851, "123456");
+     JTile38Leader leader = new JTile38Leader(host, port, password);
 
 	 SetOpts setOpts = new SetOpts.Builder()
 				.key("fleet")

@@ -60,7 +60,7 @@
 
      JTile38Follower can only use the query function, and all the returned results have been encapsulated into entity classes;
      ```java
-     JTile38Follower follower = new JTile38Follower("42.192.50.8", 9851, "123456");
+     JTile38Follower follower = new JTile38Follower(host, port, password);
      
      // Query the specified data `truck1`
      GetPointResponse getPointResponse = follower.getPoint("fleet", "truck1");
@@ -77,7 +77,7 @@
    - Using JTile38Leader
 
      ```java
-     JTile38Leader leader = new JTile38Leader("42.192.50.8", 9851, "123456");
+     JTile38Leader leader = new JTile38Leader(host, port, password);
 
 	 SetOpts setOpts = new SetOpts.Builder()
 				.key("fleet")
